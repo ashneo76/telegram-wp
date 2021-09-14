@@ -11,8 +11,8 @@ namespace Telegram.Api
 {
     public static class Constants
     {
-        public const int ApiId = ***REMOVED***;
-        public const string ApiHash = "***REMOVED***";
+        public const int ApiId = ID Here
+        public const string ApiHash = HASH Here;
 
 #if TEST_SERVER
         public const int FirstServerDCId = 1;
