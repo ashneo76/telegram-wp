@@ -1,1 +1,0 @@
-C:\Users\juanp\Documents\Repos\telegram-wp\VoipBackendServerHost\VoipBackendServerHost.vcxproj;x86
