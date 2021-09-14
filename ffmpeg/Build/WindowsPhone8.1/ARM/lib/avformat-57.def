@@ -173,5 +173,6 @@ EXPORTS
     ffurl_close
     ffurl_closep
     ffurl_open
+    ffurl_open_whitelist
     ffurl_write
     url_feof

@@ -1,0 +1,81 @@
+This file contains the steps I took to fix all the compilation errors that were left in by evgeny nadymov/telegram in order to start development
+
+
+clone repository
+
+
+windows explorer in these files open with text editor:
+telegram-wp\Telegram.Api.PCL\Telegram.Api.PCL.csproj
+telegram-wp\Telegram.Api.WP8\Telegram.Api.WP8.csproj
+telegram-wp\Telegram.Controls.WP8\Telegram.Controls.WP8.csproj
+
+comment out (always at the end of file):
+<Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir).nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir).nuget\NuGet.targets'))" />
+  </Target>
+
+
+Solution Explorer go to libtgvoip->Buffers.h ( line 114 )
+replace: Buffer(Buffer&& other) noexcept {
+with: Buffer(Buffer&& other) {
+
+
+Solution Explorer go to libtgvoip->webrtc_dsp->sparse_fir_filter.cc ( line 29 )
+replace: SparseFIRFilter::~SparseFIRFilter() = default;
+with: SparseFIRFilter::~SparseFIRFilter(){};
+
+
+Solution Explorer right click libtgvoip, click properties
+go to Linker-> Input -> Additional Depencencies -> click down arrow -> edit
+Select "All Platforms" at the top 
+replace: ../$(Platform)/$(Configuration)/TelegramClient.Opus/TelegramClient.Opus.lib
+with: ../$(Configuration)/TelegramClient.Opus/TelegramClient.Opus.lib
+
+
+For opencv download opencv3.0.0 (maybe not needed for ARM)
+http://sourceforge.net/projects/opencvlibrary/files/opencv-win/3.0.0/opencv-3.0.0.exe/download
+and follow their instructions on how to compile for WP8.1 x86 (opencv\sources\platforms\winrt\readme.txt)
+
+then copy the WP folder to telegram-wp\opencv\install (merge or replace files if needed)
+
+Solution Explorer right click OpenCVComponent, click properties
+Select "All Platforms" at the top
+go to C/C++-> General -> Additional Include Directories -> click down arrow -> edit
+add:
+$(OpenCV_Include)
+
+then go to Linker-> Genetal -> Additional Library Depencencies -> click down arrow -> edit
+add:
+$(OpenCV_lib)
+
+open telegram-wp\OpenCVComponent\opencv.props
+replace the 3 "$(OPENCV_WINRT_INSTALL_DIR)\WP\"
+with $(SolutionDir)opencv\install\WP\
+
+
+for x86 ffmpeg you need to download "n3.0.2" branch in github, and use that in FFmpegInterop, not the latest version, since most stuff is depricated and who knows what else is different
+after building using the bat file included, copy the files from 
+FFmpegInterop\ffmpeg\Build\WindowsPhone8.1
+to
+telegram-wp\ffmpeg\Build\WindowsPhone8.1
+
+open telegram-wp\TelegramClient.WP81\TelegramClient.WP81.csproj
+replace all 5 ..\ffmpeg\Build\WindowsPhone8.1\bin\
+with ..\ffmpeg\Build\WindowsPhone8.1\$(PlatformName)\bin\
+
+
+if you get errors with references like Microsoft.Expression.Interactions just right click & delete the reference and right click the references label to add it back, its under Assemblies->Extensions
+
+
+change build dependency order
+Project: BackEndProxyStub
+append a check: VoipBackendServerHost
+Project: VoipBackendServerHost
+append a check: BackEnd
+
+
+clean solution and it should build 
+

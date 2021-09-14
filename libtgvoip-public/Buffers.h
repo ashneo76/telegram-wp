@@ -111,7 +111,7 @@ namespace tgvoip{
 			length=capacity;
 		};
 		Buffer(const Buffer& other)=delete;
-		Buffer(Buffer&& other) noexcept {
+		Buffer(Buffer&& other){
 			data=other.data;
 			length=other.length;
 			other.data=NULL;

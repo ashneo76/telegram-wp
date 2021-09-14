@@ -16,6 +16,8 @@
 //
 //*****************************************************************************
 
+
+
 #include "pch.h"
 #include "FFmpegInteropMSS.h"
 #include "MediaSampleProvider.h"
@@ -29,6 +31,8 @@ extern "C"
 {
 #include <libavutil/imgutils.h>
 }
+
+#pragma warning(disable : 4996)
 
 using namespace concurrency;
 using namespace FFmpegInterop;

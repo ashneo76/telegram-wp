@@ -4,10 +4,10 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Tue Jan 29 08:48:52 2019
+/* at Tue Sep 14 15:43:59 2021
  */
-/* Compiler settings for C:\Users\evgeny\AppData\Local\Temp\PhoneVoIPApp.BackEnd.OutOfProcess.idl-5b92719d:
-    Oicf, W1, Zp8, env=Win32 (32b run), target_arch=ARM 8.00.0603 
+/* Compiler settings for C:\Users\juanp\AppData\Local\Temp\PhoneVoIPApp.BackEnd.OutOfProcess.idl-cc809e2b:
+    Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 
     protocol : dce , ms_ext, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
     VC __declspec() decoration level: 
@@ -16,7 +16,7 @@
 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#if defined(_ARM_)
+#if !defined(_M_IA64) && !defined(_M_AMD64) && !defined(_ARM_)
 
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */
@@ -28,6 +28,9 @@
 #pragma warning( disable: 4232 )  /* dllimport identity*/
 #pragma warning( disable: 4024 )  /* array to pointer mapping*/
 #pragma warning( disable: 4152 )  /* function/data pointer conversion in expression */
+#pragma warning( disable: 4100 ) /* unreferenced arguments in x86 call */
+
+#pragma optimize("", off ) 
 
 #define USE_STUBLESS_PROXY
 
@@ -47,7 +50,7 @@
 #include "PhoneVoIPApp.BackEnd.OutOfProcess.h"
 
 #define TYPE_FORMAT_STRING_SIZE   25                                
-#define PROC_FORMAT_STRING_SIZE   43                                
+#define PROC_FORMAT_STRING_SIZE   37                                
 #define EXPR_FORMAT_STRING_SIZE   1                                 
 #define TRANSMIT_AS_TABLE_SIZE    0            
 #define WIRE_MARSHAL_TABLE_SIZE   0            
@@ -88,7 +91,7 @@ extern const MIDL_STUBLESS_PROXY_INFO __x_ABI_CPhoneVoIPApp_CBackEnd_COutOfProce
 
 
 
-#if !defined(__RPC_ARM32__)
+#if !defined(__RPC_WIN32__)
 #error  Invalid build platform for this stub.
 #endif
 
@@ -111,33 +114,28 @@ static const PhoneVoIPApp2EBackEnd2EOutOfProcess_MIDL_PROC_FORMAT_STRING PhoneVo
 			0x6c,		/* Old Flags:  object, Oi2 */
 /*  2 */	NdrFcLong( 0x0 ),	/* 0 */
 /*  6 */	NdrFcShort( 0x6 ),	/* 6 */
-/*  8 */	NdrFcShort( 0xc ),	/* ARM Stack size/offset = 12 */
+/*  8 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 10 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 12 */	NdrFcShort( 0x8 ),	/* 8 */
 /* 14 */	0x45,		/* Oi2 Flags:  srv must size, has return, has ext, */
 			0x2,		/* 2 */
-/* 16 */	0xe,		/* 14 */
+/* 16 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
 /* 18 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 20 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 22 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 24 */	NdrFcShort( 0x2 ),	/* 2 */
-/* 26 */	0x2,		/* 2 */
-			0x80,		/* 128 */
-/* 28 */	0x81,		/* 129 */
-			0x0,		/* 0 */
 
 	/* Parameter __returnValue */
 
-/* 30 */	NdrFcShort( 0x13 ),	/* Flags:  must size, must free, out, */
-/* 32 */	NdrFcShort( 0x4 ),	/* ARM Stack size/offset = 4 */
-/* 34 */	NdrFcShort( 0x2 ),	/* Type Offset=2 */
+/* 24 */	NdrFcShort( 0x13 ),	/* Flags:  must size, must free, out, */
+/* 26 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 28 */	NdrFcShort( 0x2 ),	/* Type Offset=2 */
 
 	/* Return value */
 
-/* 36 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 38 */	NdrFcShort( 0x8 ),	/* ARM Stack size/offset = 8 */
-/* 40 */	0x8,		/* FC_LONG */
+/* 30 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 32 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 34 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 			0x0
@@ -329,10 +327,11 @@ const ExtendedProxyFileInfo PhoneVoIPApp2EBackEnd2EOutOfProcess_ProxyFileInfo =
     0, /* Filler2 */
     0  /* Filler3 */
 };
+#pragma optimize("", on )
 #if _MSC_VER >= 1200
 #pragma warning(pop)
 #endif
 
 
-#endif /* if defined(_ARM_) */
+#endif /* !defined(_M_IA64) && !defined(_M_AMD64) && !defined(_ARM_) */
 

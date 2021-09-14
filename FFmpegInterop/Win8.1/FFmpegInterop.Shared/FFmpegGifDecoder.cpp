@@ -36,10 +36,11 @@ typedef struct VideoInfo {
 		}
 		if (free_orig_pkt)
 		{
-			av_free_packet(&orig_pkt);
+
+			//av_free_packet(&orig_pkt);
 			free_orig_pkt = false;
 		}
-		//av_packet_unref(&orig_pkt);
+		av_packet_unref(&orig_pkt);
 
 		video_stream_idx = -1;
 		video_stream = nullptr;
@@ -500,9 +501,9 @@ Platform::Array<uint8_t>^ FFmpegGifDecoder::GetVideoFrame(int ptr, Platform::Wri
 			if (info->pkt.size == 0) {
 				if (info->free_orig_pkt){
 					info->free_orig_pkt = false;
-					av_free_packet(&info->orig_pkt);
+					//av_free_packet(&info->orig_pkt);
 				}
-				//av_packet_unref(&info->orig_pkt);
+				av_packet_unref(&info->orig_pkt);
 			}
 		}
 		else {

@@ -155,6 +155,7 @@ EXPORTS
     avcodec_license
     avcodec_open2
     avcodec_pix_fmt_to_codec_tag
+    avcodec_profile_name
     avcodec_register
     avcodec_register_all
     avcodec_set_dimensions
@@ -176,6 +177,7 @@ EXPORTS
     avpriv_dca_sample_rates
     avpriv_dnxhd_get_frame_size
     avpriv_dnxhd_get_interlaced
+    avpriv_dnxhd_parse_header_prefix
     avpriv_do_elbg
     avpriv_exif_decode_ifd
     avpriv_find_pix_fmt
